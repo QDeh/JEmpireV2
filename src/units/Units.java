@@ -17,12 +17,5 @@ public abstract class Units {
         return damage;
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
    
 }
