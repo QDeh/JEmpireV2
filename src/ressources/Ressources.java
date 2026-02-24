@@ -14,10 +14,4 @@ public abstract class Ressources {
     protected void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    public void displayRessources(Wood wood, Stone stone, Iron iron, Gold gold, Food food){
-        System.out.printf("Bois : %d | Pierre : %d | Fer : %d | Or : %d | Nourriture : %d", wood, stone, iron, gold, food);
-    }    
-    
-    // je ne suis pas sur de l'endroit ou mettre le displayRessources
 }
