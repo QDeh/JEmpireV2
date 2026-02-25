@@ -10,7 +10,6 @@ public class Village {
     private String name;
     private List<Building> buildings = new ArrayList<>();
     private List<Units> units = new ArrayList<>();
-    private List<Ressources> ressources = List.of(Wood wood, Stone stone, Iron iron, Gold gold, Food food);
 
     
     public Village(String name, List<Building> buildings, List<Units> units, List<Ressources> ressources) {
