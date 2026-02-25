@@ -11,7 +11,7 @@ public class Wall extends Building {
     }
 
     protected void assignWall(Units unit){
-        if (!(unit instanceof Soldier) && !(unit instanceof Chief)){
+        if (!(unit instanceof Soldier)){
             System.err.println("Vous ne pouvez pas assigner l'unité au mur");
         }else{
             units.add(unit);
