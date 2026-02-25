@@ -16,11 +16,4 @@ public abstract class Ressources {
         this.food = food;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    protected void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }
