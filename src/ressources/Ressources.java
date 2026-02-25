@@ -8,8 +8,12 @@ public abstract class Ressources {
     private int food = 100;
     
 
-    public Ressources(int quantity) {
-        this.quantity = quantity;
+    public Ressources(int wood, int stone, int iron, int gold, int food) {
+        this.wood = wood;
+        this.stone = stone;
+        this.iron = iron;
+        this.gold = gold;
+        this.food = food;
     }
 
     public int getQuantity() {
