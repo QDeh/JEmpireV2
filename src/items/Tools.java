@@ -6,7 +6,7 @@ import units.CraftsMan;
 public class Tools extends Items {
 
     public Tools(String name, int modifier, int level) {
-        super(name, modifier, level);
+        super("Pioche", 3, level);
     }
 
     public void upgrade() {
