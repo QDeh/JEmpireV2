@@ -12,11 +12,10 @@ public class Village {
     private List<Units> units = new ArrayList<>();
 
     
-    public Village(String name, List<Building> buildings, List<Units> units, List<Ressources> ressources) {
+    public Village(String name, List<Building> buildings, List<Units> units) {
         this.name = name;
         this.buildings = buildings;
         this.units = units;
-        this.ressources = ressources;
     }
 
     public String getName() {
