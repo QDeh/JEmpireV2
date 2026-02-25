@@ -10,7 +10,7 @@ public class Barraks extends Building {
     }
 
     protected void assignBarraks(Units unit){
-        if (!(unit instanceof Soldier) && !(unit instanceof Chief)){
+        if (!(unit instanceof Soldier)){
             System.err.println("Vous ne pouvez pas assigner l'unité à la caserne");
         }else{
             units.add(unit);
