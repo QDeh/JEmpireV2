@@ -30,7 +30,4 @@ public class Village {
         return units;
     }
 
-    public List<Ressources> getRessources() {
-        return ressources;
-    }
 }
