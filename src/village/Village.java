@@ -56,7 +56,7 @@ public class Village {
             }
         }
     }
-    public Weapon epee = createWeapon("Sword", 5, 1);
-    public Tools pioche = createTool("Pickaxe", 3, 1);
+    //public Weapon epee = createWeapon("Sword", 5, 1);
+   // public Tools pioche = createTool("Pickaxe", 3, 1);
     
 }
