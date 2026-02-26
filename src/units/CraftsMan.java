@@ -1,8 +1,16 @@
 package units;
-
+import items.Items;
+import items.Tools;
 public class CraftsMan extends Units {
 
-    public CraftsMan(int hp, int damage) {
-        super(hp, damage);
+    public CraftsMan(int hp, int damage, Items tool) {
+        super(hp, damage,tool);
+    }
+     public void equipTool(Tools tool) {
+        if (tool != null) {
+            this.item = tool;
+        } else {
+            System.out.println( "Erreur : Impossible d'équiper un outil car il y en a déja un d'équipé ou il n'y en a pas de disponible .");
+        }
     }
 }

@@ -1,5 +1,7 @@
 package units;
 
+import items.*;
+
 public abstract class Units {
     private int hp;
     private int damage;
@@ -9,8 +11,14 @@ public abstract class Units {
         this(10, 1);
     }
     public Units(int hp, int damage) {
+    private int hp = 10;
+    private int damage = 1;
+    protected Items item;
+
+    public Units(int hp, int damage, Items item) {
         this.hp = hp;
         this.damage = damage;
+        this.item = item;
     }
 
     public int getHp() {
@@ -27,15 +35,14 @@ public abstract class Units {
 
     protected void setDamage(int damage) {
         this.damage = damage;
+
     }
 
-    public boolean getHasItem() {
-        return hasItem;
+    public Items getItem() {
+        return item;
     }
 
-    protected void setHasItem(boolean hasItem) {
-        this.hasItem = hasItem;
+    public void setItem(Items item) {
+        this.item = item;
     }
-    
-   
 }
