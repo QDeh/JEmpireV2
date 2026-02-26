@@ -1,10 +1,13 @@
 package units;
 
 public abstract class Units {
-    private int hp = 10;
-    private int damage = 1;
+    private int hp;
+    private int damage;
     private boolean hasItem = false;
 
+    public Units(){
+        this(10, 1);
+    }
     public Units(int hp, int damage) {
         this.hp = hp;
         this.damage = damage;
