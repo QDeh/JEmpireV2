@@ -5,20 +5,16 @@ import items.*;
 public abstract class Units {
     private int hp;
     private int damage;
-    private boolean hasItem = false;
-
-    public Units(){
-        this(10, 1);
-    }
-    public Units(int hp, int damage) {
-    private int hp = 10;
-    private int damage = 1;
     protected Items item;
 
     public Units(int hp, int damage, Items item) {
         this.hp = hp;
         this.damage = damage;
         this.item = item;
+    }
+
+    public Units() {
+        this(10, 1, null);
     }
 
     public int getHp() {
