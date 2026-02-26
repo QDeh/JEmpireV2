@@ -1,6 +1,9 @@
 import java.util.*;
+
+import building.House;
+import units.Units;
 import village.*;
-import units.*;
+
 
 public class Main {
     static Village village = new Village("Niort");
@@ -71,6 +74,14 @@ public class Main {
             case 4:
                 displayUnassignMenu();
                 choice = readInt("Votre choix : ");
+                
+                if (choice == 0) {
+                    return;
+                }
+                Units unit = village.getUnits().get(choice-1);
+                System.out.println("Unité désassignée : " + unit);
+
+
                 break;
             case 5:
                 displayTrainMenu();
@@ -185,7 +196,7 @@ public class Main {
     }
 
     public void selectUnassignMenu(){
-        village.getUnits().get(choice-1);
+        village.unassignUnit(village.getUnits().get(choice-1));
     }
 
     public void displayTrainMenu() {
