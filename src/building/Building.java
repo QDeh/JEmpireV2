@@ -6,8 +6,8 @@ import units.*;
 import village.Village;
 
 public abstract class Building {
-    int level = 1;
-    List<Units> units = new ArrayList<>(); 
+    private int level = 1;
+    private List<Units> units = new ArrayList<>(); 
 
     public Building(int level, List<Units> units) {
         this.level = level;
