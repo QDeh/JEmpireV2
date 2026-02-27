@@ -6,10 +6,10 @@ import village.*;
 
 
 public class Main {
-    static Village village = new Village("Niort");
-    static Scanner scanner = new Scanner(System.in);
-    static int choice;
-    static boolean quit = false;
+    private static Village village = new Village("Niort");
+    private static Scanner scanner = new Scanner(System.in);
+    private static int choice;
+    private static boolean quit = false;
 
     public static int readInt() {
         return readInt("Entrez un nombre");
