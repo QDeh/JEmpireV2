@@ -11,7 +11,7 @@ git clone https://github.com/QDeh/JEmpireV2
 
 Ensuite il faut compiler les fichiers :
 ```
-javac -d build src/main.java
+javac -d build (Get-ChildItem -Recurse src/*.java).FullName
 ```
 Puis lancer le jeu :
 ```
