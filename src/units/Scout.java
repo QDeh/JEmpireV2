@@ -4,7 +4,7 @@ import items.Tools;
 
 public class Scout extends Soldier {
 
-    public Scout(int hp, int damage) {
+    public Scout() {
         super(15, 1, null);
     }
     // Fonction pour explorer hors du village et ramener des ressources

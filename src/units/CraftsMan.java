@@ -1,11 +1,13 @@
 package units;
-import items.Items;
+
 import items.Tools;
 public class CraftsMan extends Units {
 
-    public CraftsMan(int hp, int damage, Items tool) {
-        super(hp, damage,tool);
+    public CraftsMan() {
+        super();
     }
+
+    
      public void equipTool(Tools tool) {
         if (tool != null) {
             this.item = tool;

@@ -3,7 +3,6 @@ package building;
 import java.util.ArrayList;
 import java.util.List;
 import units.*;
-import village.Village;
 
 public abstract class Building {
     private int level = 1;
@@ -16,6 +15,10 @@ public abstract class Building {
 
     public int getLevel() {
         return level;
+    }
+
+    public void upgradeBuilding(){
+        level++;
     }
 
     public List<Units> getUnits() {

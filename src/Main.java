@@ -1,6 +1,5 @@
 import java.util.*;
 
-import building.House;
 import units.Units;
 import village.*;
 
@@ -9,7 +8,7 @@ public class Main {
     private static Village village = new Village("Niort");
     private static Scanner scanner = new Scanner(System.in);
     private static int choice;
-    private static boolean quit = false;
+    private static boolean again = true;
 
     public static int readInt() {
         return readInt("Entrez un nombre");
@@ -22,7 +21,7 @@ public class Main {
         return result;
     }
     public static void main(String[] args) {
-        while (village.getUnits().size() > 0 && !quit) {
+        while (village.getUnits().size() > 0 && again) {
             Main game = new Main();
             game.displayMainMenu();
             choice = readInt("Votre choix : ");
@@ -40,8 +39,9 @@ public class Main {
         System.out.println("============================================================================");
         System.out.println("================================== DÉTAILS =================================");
         village.displayRessources();
-        village.displayVillagers();
+        village.displayUnits();
         village.displayBuildings();
+        village.displayItems();
         System.out.println("\n");
         System.out.println("=================================== MENU ===================================\n");
         System.out.println("1 - Construire un bâtiment");
@@ -86,10 +86,12 @@ public class Main {
             case 5:
                 displayTrainMenu();
                 choice = readInt("Votre choix : ");
+                selectTrainMenu();
                 break;
             case 6:
                 displayRecruitMenu();
                 choice = readInt("Votre choix : ");
+                selectRecruitMenu();
                 break;
             case 7:
                 displayEquipMenu();
@@ -99,7 +101,7 @@ public class Main {
                 village.FinishDay();
                 break;
             case 0:
-                quit = true;
+                again = false;
                 System.out.println("Au revoir !");
                 break;
         }
@@ -120,22 +122,22 @@ public class Main {
     public void selectBuildMenu(){
         switch (choice) {
             case 1:
-                //village.buildHouse();
+                village.createBuilding("house");
                 break;
             case 2:
-                //village.buildFarm();
+                village.createBuilding("farm");
                 break;
             case 3:
-                //village.buildMine();
+                village.createBuilding("mine");
                 break;
             case 4:
-                //village.buildWorkshop();
+                village.createBuilding("workshop");
                 break;
             case 5:
-                //village.buildBarraks();
+                village.createBuilding("barraks");
                 break;
             case 6:
-                //village.buildWall();
+                village.createBuilding("wall");
                 break;
             case 0:
                 break;
@@ -145,43 +147,17 @@ public class Main {
     public void displayUpgradeMenu() {
         System.out.println("=========================== Améliorer un bâtiment ==========================");
         village.displayRessources();
-        System.out.println("1 - Améliorer un Atelier");
-        System.out.println("2 - Améliorer une Caserne");
-        System.out.println("3 - Améliorer une Ferme");
-        System.out.println("4 - Améliorer une Maison");
-        System.out.println("5 - Améliorer une Mine");
-        System.out.println("6 - Améliorer un Mur de défense");
+        village.displayBuildings();
         System.out.println("0 - Quitter\n");
     }
 
     public void selectUpgradeMenu(){
-        switch (choice) {
-            case 1:
-                //village.upgradeHouse();
-                break;
-            case 2:
-                //village.upgradeFarm();
-                break;
-            case 3:
-                //village.upgradeMine();
-                break;
-            case 4:
-                //village.upgradeWorkshop();
-                break;
-            case 5:
-                //village.upgradeBarraks();
-                break;
-            case 6:
-                //village.upgradeWall();
-                break;
-            case 0:
-                break;
+            village.getBuildings().get(choice-1).upgradeBuilding();
         }
-    }
 
     public void displayAssignMenu() {
         System.out.println("=========================== Asssigner une unité ==========================");
-        village.displayVillagers();
+        village.displayUnits();
         System.out.println("0 - Quitter\n");
     }
 
@@ -191,7 +167,7 @@ public class Main {
 
     public void displayUnassignMenu() {
         System.out.println("=========================== Libérer une unité ==========================");
-        village.displayVillagers();
+        village.displayUnits();
         System.out.println("0 - Quitter\n");
     }
 
@@ -202,17 +178,21 @@ public class Main {
     public void displayTrainMenu() {
         System.out.println("=========================== Former une unité ==========================");
         System.out.println("1 - Former un Soldat");
-        System.out.println("2 - Former un Chef");
+        System.out.println("2 - Former un Éclaireur");
+        System.out.println("3 - Former un Chef");
         System.out.println("0 - Quitter\n");
     }
 
    public void selectTrainMenu(){
         switch (choice) {
             case 1:
-                //village.trainSoldier();
+                village.createUnit("soldier");
                 break;
             case 2:
-                //village.trainChief();
+                village.createUnit("scout");
+                break;
+            case 3:
+                village.createUnit("chief");
                 break;
             case 0:
                 break;
@@ -222,21 +202,17 @@ public class Main {
     public void displayRecruitMenu() {
         System.out.println("=========================== Recruter une unité ==========================");
         System.out.println("1 - Recruter un Villageois");
-        System.out.println("2 - Recruter un Éclaireur");
-        System.out.println("3 - Recruter un Artisan");
+        System.out.println("2 - Recruter un Artisan");
         System.out.println("0 - Quitter\n");
     }
 
     public void selectRecruitMenu(){
         switch (choice) {
             case 1:
-                //Village.recruitVillager();
+                village.createUnit("villager");
                 break;
             case 2:
-                //village.recruitScout();
-                break;
-            case 3:
-                //village.recruitCraftsMan();
+                village.createUnit("craftsman");
                 break;
             case 0:
                 break;
@@ -245,7 +221,11 @@ public class Main {
 
     public void displayEquipMenu() {
         System.out.println("=========================== Équiper un item ==========================");
-        // ma version de la classe village n'a pas la liste des items, à faire plus tard
+        village.displayItems();
         System.out.println("0 - Quitter\n");
+    }
+
+    public void selectItem() {
+        //village.unassignUnit(village.getUnits().get(choice - 1));
     }
 }

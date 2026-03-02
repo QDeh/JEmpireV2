@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Chief extends Soldier {
     
-    public Chief(int hp, int damage) {
+    public Chief() {
         super(30, 5,null);
        
     }

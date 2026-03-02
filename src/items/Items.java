@@ -27,7 +27,7 @@ public class Items {
         this.name = name;
     }
 
-    protected int getLevel() {
+    public int getLevel() {
         return level;
     }
 

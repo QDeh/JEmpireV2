@@ -39,4 +39,44 @@ public class Ressources {
         return food;
     }
 
+    protected void setWood(int wood) {
+        this.wood = wood;
+    }
+
+    protected void setStone(int stone) {
+        this.stone = stone;
+    }
+
+    protected void setIron(int iron) {
+        this.iron = iron;
+    }
+
+    protected void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    protected void setFood(int food) {
+        this.food = food;
+    }
+
+    public void addFood(int amount) {
+        this.food += amount;
+    }
+
+    public void addWood(int amount) {
+        this.wood += amount;
+    }
+
+    public void addStone(int amount) {
+        this.stone += amount;
+    }
+
+    public void addIron(int amount) {
+        this.iron += amount;
+    }
+
+    public void addGold(int amount) {
+        this.gold += amount;
+    }
+    
 }
