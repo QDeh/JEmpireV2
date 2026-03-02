@@ -1,12 +1,9 @@
 package items;
 
-import units.Villager;
-import units.CraftsMan;
-
 public class Tools extends Items {
 
-    public Tools(String name, int modifier, int level) {
-        super("Pioche", 3, level);
+    public Tools() {
+        super("Outil", 3, 1);
     }
 
     public void upgrade() {

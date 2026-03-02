@@ -83,22 +83,25 @@ public class Village {
         }
         if (building != null) {
             building.unassign(unit);
-
-            boolean assigned = false;
-            for (Building newHouse : getBuildings()) {
-                if (newHouse instanceof House) {
-                    if(newHouse.getUnits().size() < newHouse.getLevel()) {
-                        assigned = true;
-                        newHouse.assign(unit);
-                        break;
-                    }
-                }
-            }
-            if (!assigned) {
-                System.err.println("Aucun logement disponible pour réassigner l'unité");
-            }
+            assignHouse(unit);
         } else {
             System.err.println("L'unité n'est assignée à aucun bâtiment");
+        }
+    }
+
+    public void assignHouse(Units unit){
+        boolean assigned = false;
+        for (Building newHouse : getBuildings()) {
+            if (newHouse instanceof House) {
+                if (newHouse.getUnits().size() < newHouse.getLevel()) {
+                    assigned = true;
+                    newHouse.assign(unit);
+                    break;
+                }
+            }
+        }
+        if (!assigned) {
+            System.err.println("Aucun logement disponible");
         }
     }
 
@@ -108,7 +111,23 @@ public class Village {
 
     public void FinishDay() {
         day++;
-        // à compléter
+        for (Building building : buildings){
+            switch (building.getClass().getSimpleName()) {
+                case "Farm":
+                    //ressources.setFood(ressources.getFood()+3*building.getLevel());
+                    //ressources.setWood(ressources.getWood()+5*building.getLevel());
+                    break;
+                case "Mine":
+                    //ressources.setStone(ressources.getStone() + 5 * building.getLevel());
+                    //ressources.setGold(ressources.getGold() + 2 * building.getLevel());
+                    break;
+                case "Workshop":
+                    items.add(new Tools());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public void displayRessources() {
@@ -122,11 +141,11 @@ public class Village {
                 food);
     }
 
-    public void displayVillagers() {
+    public void displayUnits() {
         System.out.println("Unités :");
         int i = 1;
         for (Units unit : getUnits()) {
-            System.out.printf("%d - type : %s | pv : %d | dégâts : %d", i, unit.getClass().getSimpleName(),
+            System.out.printf("%d - type : %s \t| pv : %d \t| dégâts : %d%n", i, unit.getClass().getSimpleName(),
                     unit.getHp(), unit.getDamage());
             i++;
         }
@@ -137,8 +156,18 @@ public class Village {
         System.out.println("Bâtiments :");
         int i = 1;
         for (Building building : buildings) {
-            System.out.printf("%d - type : %s | niveau : %d", i, building.getClass().getSimpleName(),
+            System.out.printf("%d - type : %s \t| niveau : %d%n", i, building.getClass().getSimpleName(),
                     building.getLevel());
+            i++;
+        }
+        System.out.println("\n");
+    }
+
+    public void displayItems(){
+        System.out.println("Items :");
+        int i = 1;
+        for (Items item : items) {
+            System.out.printf("%d - name : %s \t| modifier : %d \t| niveau : %d%n", i, item.getName(), item.getModifier(), item.getLevel());
             i++;
         }
     }
@@ -154,7 +183,7 @@ public class Village {
     }
 
     public Tools createTool(String name, int modifier, int level) {
-        Tools newTool = new Tools(name, modifier, level);
+        Tools newTool = new Tools();
         System.out.println("Outil fabriqué : " + newTool.getName() + " (Modificateur: " + newTool.getModifier() + ")");
         return newTool;
     }
@@ -166,6 +195,63 @@ public class Village {
                 System.out.println(
                         "- " + unit.getItem().getName() + " (Modificateur: " + unit.getItem().getModifier() + ")");
             }
+        }
+    }
+
+    public void createBuilding(String type){
+        switch (type.toLowerCase()) {
+            case "house":
+                buildings.add(new House(1,new ArrayList<Units>()));
+                break;
+            case "farm":
+                buildings.add(new Farm(1, new ArrayList<Units>()));
+                break;
+            case "mine":
+                buildings.add(new Mine(1, new ArrayList<Units>()));
+                break;
+            case "workshop":
+                buildings.add(new Workshop(1, new ArrayList<Units>()));
+                break;
+            case "barraks":
+                buildings.add(new Barraks(1, new ArrayList<Units>()));
+                break;
+            case "wall":
+                if (getBuildings().stream().anyMatch(b -> b instanceof Wall)) {
+                    System.err.println("Il y a déjà un mur");
+                    return;
+                }
+                buildings.add(new Wall(1, new ArrayList<Units>()));
+                break;
+            default:
+                System.err.println("Type inconnu");
+                return;
+        }
+    }
+
+    public void createUnit(String type){
+        switch (type.toLowerCase()) {
+            case "soldier":
+                assignHouse(new Soldier());
+                break;
+            case "scout":
+                assignHouse(new Scout());
+                break;
+            case "chief":
+                if (getUnits().stream().anyMatch(c -> c instanceof Chief)) {
+                    System.err.println("Il y a déjà un chef");
+                    return;
+                }
+                assignHouse(new Chief());
+                break;
+            case "villager":
+                assignHouse(new Villager());
+                break;
+            case "craftsman":
+                assignHouse(new CraftsMan());
+                break;
+            default:
+                System.err.println("Type inconnu");
+                return;
         }
     }
 
