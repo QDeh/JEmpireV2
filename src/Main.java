@@ -1,13 +1,12 @@
 import java.util.*;
 
-import units.Units;
 import village.*;
-
 
 public class Main {
     private static Village village = new Village("Niort");
     private static Scanner scanner = new Scanner(System.in);
     private static int choice;
+    private static int assignChoice;
     private static boolean again = true;
 
     public static int readInt() {
@@ -70,18 +69,18 @@ public class Main {
             case 3:
                 displayAssignMenu();
                 choice = readInt("Votre choix : ");
+                assignChoice = choice-1;
+                displayBuildingAssignment();
+                choice = readInt("Votre choix : ");
+                selectAssignMenu(assignChoice);
                 break;
             case 4:
                 displayUnassignMenu();
                 choice = readInt("Votre choix : ");
-                
                 if (choice == 0) {
                     return;
                 }
-                Units unit = village.getUnits().get(choice-1);
-                System.out.println("Unité désassignée : " + unit);
-
-
+                selectUnassignMenu();
                 break;
             case 5:
                 displayTrainMenu();
@@ -161,8 +160,15 @@ public class Main {
         System.out.println("0 - Quitter\n");
     }
 
-    public void selectAssignMenu(){
-        village.getUnits().get(choice-1);
+    public void displayBuildingAssignment() {
+        System.out.println("=========================== Sélectionner un bâtiment ==========================");
+        village.displayBuildings();
+        System.out.println("0 - Quitter\n");
+    }
+
+    public void selectAssignMenu(int assignChoice){ 
+        village.unassignUnit(village.getUnits().get(assignChoice));
+        village.getBuildings().get(choice-1).assign(village.getUnits().get(assignChoice));
     }
 
     public void displayUnassignMenu() {
